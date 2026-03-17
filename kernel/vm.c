@@ -416,7 +416,7 @@ int copyinstr(pagetable_t pagetable, char *dst, uint64 srcva, uint64 max)
 
   while (got_null == 0 && max > 0)
   {
-    va0 = PGROUNDDOWN(srcva);       // 计算srcva所在页面的起始虚拟地址
+    va0 = PGROUNDDOWN(srcva);       // 把任意虚拟地址向下取整到最近的页起始地址（也就是提取 “页基址”）。
     pa0 = walkaddr(pagetable, va0); // 解析用户虚拟地址va0到物理地址pa0
     if (pa0 == 0)
       return -1;

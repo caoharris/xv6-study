@@ -21,11 +21,11 @@ static void freeproc(struct proc *p);
 
 extern char trampoline[]; // trampoline.S
 
-// add
-struct usyscall
-{
-  int pid; // Process ID
-};
+// // add
+// struct usyscall
+// {
+//   int pid; // Process ID
+// };
 
 // initialize the proc table at boot time.
 void procinit(void)

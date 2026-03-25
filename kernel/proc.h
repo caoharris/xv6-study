@@ -92,6 +92,12 @@ enum procstate
   ZOMBIE
 };
 
+// add
+struct usyscall
+{
+  int pid; // Process ID
+};
+
 // Per-process state
 struct proc
 {

@@ -20,7 +20,7 @@ static void wakeup1(struct proc *chan);
 static void freeproc(struct proc *p);
 
 extern char trampoline[]; // trampoline.S
-
+extern void kvm_free_kernelpgtbl(pagetable_t pagetable);
 // // add
 // struct usyscall
 // {
@@ -40,7 +40,7 @@ void procinit(void)
     // Allocate a page for the process's kernel stack.
     // Map it high in memory, followed by an invalid
     // guard page.
-    allocproc
+
     // add
     //  char *pa = kalloc();
     //  if (pa == 0)
@@ -262,9 +262,8 @@ void proc_freepagetable(pagetable_t pagetable, uint64 sz)
 {
   uvmunmap(pagetable, TRAMPOLINE, 1, 0);
   uvmunmap(pagetable, TRAPFRAME, 1, 0);
-  allocproc
-      // <释放USYSCALL函数的映射关系>
-      uvmunmap(pagetable, USYSCALL, 1, 0);
+  // <释放USYSCALL函数的映射关系>
+  uvmunmap(pagetable, USYSCALL, 1, 0);
 
   uvmfree(pagetable, sz);
 }

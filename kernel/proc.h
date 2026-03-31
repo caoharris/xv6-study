@@ -123,4 +123,5 @@ struct proc
 
   // add
   struct usyscall *usyscall;
+  pagetable_t kernelpgtbl;
 };
